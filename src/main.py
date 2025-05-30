@@ -8,9 +8,19 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
+
     
 if __name__ == '__main__':
-    application = ApplicationBuilder().token(get_token()).build()
+    application = (
+    ApplicationBuilder()
+        .token(get_token())
+        .pool_timeout(5)
+        .read_timeout(60)
+        .write_timeout(60)
+        .connect_timeout(10)
+        .media_write_timeout(120)
+        .build()
+    )
     
     application.add_handlers(handlers=handlers)
     application.add_error_handler(error_handler)
