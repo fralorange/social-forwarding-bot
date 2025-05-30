@@ -1,7 +1,7 @@
 import logging
 import json
 from telegram import Update
-from telegram.ext import Application, ContextTypes
+from telegram.ext import ApplicationBuilder
 from utilities.token import get_token
 from handlers.handlers import handlers
 from handlers.error.error_handler import error_handler
@@ -11,7 +11,16 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-application = Application.builder().token(get_token()).build()
+application = (
+    ApplicationBuilder()
+        .token(get_token())
+        .pool_timeout(5)
+        .read_timeout(60)
+        .write_timeout(60)
+        .connect_timeout(10)
+        .media_write_timeout(120)
+        .build()
+    )
 application.add_handlers(handlers)
 application.add_error_handler(error_handler)
 
