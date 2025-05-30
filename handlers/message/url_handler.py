@@ -6,7 +6,7 @@ from telegram import Update, InputFile
 from telegram.ext import ContextTypes
 sys.path.append(
     os.path.abspath(
-        os.path.join(os.path.dirname(__file__), '../..')
+        os.path.join(os.path.dirname(__file__), '..')
     )
 )
 from utilities.downloaders.reddit import download_reddit_post_async
